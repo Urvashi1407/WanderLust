@@ -183,6 +183,9 @@ app.use((req,res,next)=>{
   
 // });
 
+app.get("/", (req, res) => {
+  res.redirect("/listings");
+});
 
 
 
@@ -221,11 +224,13 @@ app.use((req, res, next) => {
 // Error handler (already you have)
 app.use((err, req, res, next) => {
     let {statusCode=500,message="something went wrong"}=err;
-res.status(statusCode).render("error.ejs",{message});
+res.status(statusCode).render("error",{message});
  
 });
 
 
-app.listen(8080,()=>{
-  console.log("server is listening to port 8080");
-})
+const port = process.env.PORT || 8080;
+
+app.listen(port, () => {
+  console.log(`server is listening on port ${port}`);
+});
